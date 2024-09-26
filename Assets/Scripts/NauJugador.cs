@@ -17,11 +17,20 @@ public class NewBehaviourScript : MonoBehaviour
         minPantalla = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
         maxPantalla = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
 
-        minPantalla.x = minPantalla.x + 0.75f;
-        maxPantalla.x = maxPantalla.x - 0.75f;
+       
+        float mesuraMeitatImatgeX = GetComponent<SpriteRenderer>().sprite.bounds.size.x * transform.localScale.x / 2;
+        float mesuraMeitatImaggeY = GetComponent<SpriteRenderer>().sprite.bounds.size.y * transform.localScale.y / 2;
 
-        minPantalla.y = minPantalla.y + 0.75f;
-        maxPantalla.y = maxPantalla.y - 0.75f;
+        // minPantalla.x = minPantalla.x + 0.75f;
+        // minPantalla.x += 0.75f; // Es sinònim a la línia de dalt
+
+
+        //GetComponent<SpriteRenderer>(): Este método busca el componente SpriteRenderer adjunto al objeto al que está asignado este script. SpriteRenderer es el componente que maneja la imagen (sprite) de la nave.
+        //.sprite.bounds.size.x: Accede al tamaño del sprite (en el eje x), lo cual te da el ancho de la imagen para ajustar correctamente los límites de la pantalla y evitar que la nave salga fuera de los bordes.
+        minPantalla.x += mesuraMeitatImatgeX;
+        maxPantalla.x -= mesuraMeitatImatgeX;
+        minPantalla.y += mesuraMeitatImaggeY;
+        maxPantalla.y -= mesuraMeitatImaggeY;
 
     }
 
