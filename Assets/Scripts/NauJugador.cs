@@ -9,6 +9,8 @@ public class NewBehaviourScript : MonoBehaviour
 
     private Vector2 minPantalla, maxPantalla;
 
+    [SerializeField] private GameObject prefabProjectil;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,8 +39,24 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        MovimentNau();
+        DisparaProjectil();
+    }
+
+
+    private void DisparaProjectil()
+    {
+        if (Input.GetKey("space"))
+        {
+            GameObject projectil = Instantiate(prefabProjectil);
+            projectil.transform.position = transform.position;
+        }
+
+    }
+    private void MovimentNau()
+    {
         float direccioIndicadaX = Input.GetAxisRaw("Horizontal");
-     float direccioIndicadaY = Input.GetAxisRaw("Vertical");
+        float direccioIndicadaY = Input.GetAxisRaw("Vertical");
         //Debug.Log("X: "+ direccioIndicadaX + " - Y: " + direccioIndicadaY  );
 
 
@@ -49,8 +67,10 @@ public class NewBehaviourScript : MonoBehaviour
 
         novaPos.x = Mathf.Clamp(novaPos.x, minPantalla.x, maxPantalla.x);
         novaPos.y = Mathf.Clamp(novaPos.y, minPantalla.y, maxPantalla.y);
-        
+
 
         transform.position = novaPos;
     }
+
 }
+
